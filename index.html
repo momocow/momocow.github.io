@@ -105,15 +105,15 @@
 		<div class="container">
 			<h1>GitHub &amp;<br>作品</h1>
 			<ul class="award-list list-flat">
-				<li><i class="fa fa-wrench" aria-hidden="true"></i><a href="//github.com/momocow/HanaYome">HanaYome- 花嫁瀏覽器</a></li><span class="tooltip tooltip-theme-red wip">持續更新</span>
+				<li><i class="fa fa-wrench" aria-hidden="true"></i><a href="//github.com/momocow/HanaYome">HanaYome- 花嫁瀏覽器</a></li><span class="wip">持續更新</span>
 				<li>網頁遊戲花騎士專用瀏覽器</li>
 			</ul>
 			<ul class="award-list list-flat">
-				<li><i class="fa fa-check-square-o" aria-hidden="true"></i><a href="//github.com/momocow/OGInvoice">OGInvoice- OGame出貨單</a></li><span class="tooltip tooltip-theme-green release">完成</span>
+				<li><i class="fa fa-check-square-o" aria-hidden="true"></i><a href="//github.com/momocow/OGInvoice">OGInvoice- OGame出貨單</a></li><span class="release">完成</span>
 				<li>網遊OGame的輔助插件，主要功能為交易紀錄及統計，油商周交易量統計以及催單</li>
 			</ul>
 			<ul class="award-list list-flat">
-				<li><i class="fa fa-wrench" aria-hidden="true"></i><a href="//github.com/momocow/MoEMail">MoEMail- Minecraft訊息系統</a></li><span class="tooltip tooltip-theme-red wip">持續更新</span>
+				<li><i class="fa fa-wrench" aria-hidden="true"></i><a href="//github.com/momocow/MoEMail">MoEMail- Minecraft訊息系統</a></li><span class="wip">持續更新</span>
 				<li>Minecraft多人伺服器的訊息系統，支援離線訊息，另有網頁版本查看訊息</li>
 			</ul>
 		</div>
@@ -155,6 +155,8 @@
 		strings: ["吃草!", "吃草!", "還是吃草!!!", "...還有寫程式", "應該吧", "_(:з」∠)_"],
 
 		typeSpeed:90,backDelay:700,contentType:"html",loop:!0,resetCallback:function(){newTyped()}}),$(".reset").click(function(){$("#typed").typed("reset")})});
+		
+		$(".wip").tooltip();
     </script>
 </body>
 </html>
