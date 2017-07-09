@@ -28,34 +28,31 @@
 		/*https://www.w3schools.com/howto/howto_css_tooltip.asp*/
 		.ttp {
 			position: relative;
-			display: inline-block;
-			border-bottom: 1px dotted black;
 		}
 		.ttp .ttptext {
 			visibility: hidden;
 			width: 120px;
-			background-color: #555;
+			background-color: #3a3a3a;
 			color: #fff;
 			text-align: center;
 			border-radius: 6px;
 			padding: 5px 0;
 			position: absolute;
 			z-index: 1;
-			bottom: 125%;
-			left: 50%;
-			margin-left: -60px;
 			opacity: 0;
 			transition: opacity 0.6s;
+			font-size: 16px;
+			left: -128px;
 		}
 		.ttp .ttptext::after {
 			content: "";
 			position: absolute;
-			right: 100%;
+			left: 100%;
 			top: 50%;
-			margin-left: -5px;
+			margin-top: -5px;
 			border-width: 5px;
 			border-style: solid;
-			border-color: #555 transparent transparent transparent;
+			border-color: transparent transparent transparent #555; 
 		}
 		.ttp:hover .ttptext {
 			visibility: visible;
@@ -145,16 +142,19 @@
 	<div class="award section second" id="project">
 		<div class="container">
 			<h1>GitHub &amp;<br>作品</h1>
+			<i class="ttp ttp-wip fa fa-wrench fa-2x" aria-hidden="true"><span class="ttptext">持續更新</span></i>
 			<ul class="award-list list-flat">
-				<li><i class="ttp ttp-wip fa fa-wrench fa-3x" aria-hidden="true"><span class="ttptext">持續更新</span></i><a href="//github.com/momocow/HanaYome">HanaYome- 花嫁瀏覽器</a></li>
+				<li><a href="//github.com/momocow/HanaYome">HanaYome- 花嫁瀏覽器</a></li>
 				<li>網頁遊戲花騎士專用瀏覽器</li>
 			</ul>
+			<i class="ttp ttp-release fa fa-check-square-o fa-2x" aria-hidden="true"><span class="ttptext">完成開發</span></i>
 			<ul class="award-list list-flat">
-				<li><i class="ttp ttp-release fa fa-check-square-o fa-3x" aria-hidden="true"><span class="ttptext">完成開發</span></i><a href="//github.com/momocow/OGInvoice">OGInvoice- OGame出貨單</a></li>
+				<li><a href="//github.com/momocow/OGInvoice">OGInvoice- OGame出貨單</a></li>
 				<li>網遊OGame的輔助插件，主要功能為交易紀錄及統計，油商周交易量統計以及催單</li>
 			</ul>
+			<i class="ttp ttp-wip fa fa-wrench fa-2x" aria-hidden="true"><span class="ttptext">持續更新</span></i>
 			<ul class="award-list list-flat">
-				<li><i class="ttp ttp-wip fa fa-wrench fa-3x" aria-hidden="true"><span class="ttptext">持續更新</span></i><a href="//github.com/momocow/MoEMail">MoEMail- Minecraft訊息系統</a></li>
+				<li><a href="//github.com/momocow/MoEMail">MoEMail- Minecraft訊息系統</a></li>
 				<li>Minecraft多人伺服器的訊息系統，支援離線訊息，另有網頁版本查看訊息</li>
 			</ul>
 		</div>
