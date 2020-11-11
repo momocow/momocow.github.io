@@ -4,5 +4,8 @@
     "prettier-standard",
     "standard-jsx",
     "standard-react"
-  ]
+  ],
+  "rules": {
+    "jsx-quotes": ["error", "prefer-double"]
+  }
 }
