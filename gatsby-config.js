@@ -55,6 +55,7 @@ module.exports = {
     siteUrl: 'https://cow.moe/'
   },
   plugins: [
+    // 'gatsby-theme-material-ui',
     'gatsby-plugin-robots-txt',
     'gatsby-plugin-advanced-sitemap',
     'gatsby-plugin-sharp',
@@ -62,37 +63,43 @@ module.exports = {
     'gatsby-plugin-react-helmet-async',
     'gatsby-transformer-yaml',
     'gatsby-transformer-sharp',
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'data',
-        path: './src/data/'
-      }
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'images',
-        path: './src/images/'
-      }
-    },
+    // {
+    //   resolve: `gatsby-plugin-google-fonts`,
+    //   options: {
+    //     fonts: [
+    //       'Source Code Pro'
+    //     ],
+    //     display: 'swap'
+    //   }
+    // },
+    // {
+    //   resolve: 'gatsby-source-filesystem',
+    //   options: {
+    //     name: 'data',
+    //     path: './src/data/'
+    //   }
+    // },
+    // {
+    //   resolve: 'gatsby-source-filesystem',
+    //   options: {
+    //     name: 'images',
+    //     path: './src/assets/images/'
+    //   }
+    // },
     {
       resolve: `gatsby-plugin-manifest`,
       options: createManifestOptions(lang, allLocalizedMetadata, {
-        icon: 'src/images/logo.svg',
-        categories: ['personalization'],
-        display: 'minimal-ui',
-        theme_color: '#42b983',
-        background_color: '#42b983'
+        icon: 'src/assets/images/logo.svg',
+        display: 'minimal-ui'
       })
     },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: `locales`,
-        path: 'src/locales'
-      }
-    },
+    // {
+    //   resolve: 'gatsby-source-filesystem',
+    //   options: {
+    //     name: `locales`,
+    //     path: 'src/locales'
+    //   }
+    // },
     {
       resolve: 'gatsby-plugin-react-i18next',
       options: {
