@@ -7,7 +7,6 @@ export default function Portfolio() {
   const { t } = useTranslation()
   return (
     <Layout>
-      <div>{t('metadata:name')}</div>
     </Layout>
   )
 }
