@@ -58,6 +58,7 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-standard": "^4.0.2",
     "gitmoji-cli": "^3.2.12",
+    "husky": "^4.3.5",
     "prettier": "2.1.2",
     "prettier-config-standard": "^1.0.1"
   },
@@ -72,5 +73,11 @@
   "bugs": {
     "url": "https://github.com/momocow/momocow.github.io/issues"
   },
-  "homepage": "https://github.com/momocow/momocow.github.io#readme"
+  "homepage": "https://github.com/momocow/momocow.github.io#readme",
+  "husky": {
+      "hooks": {
+          "pre-commit": "npm run format",
+          "pre-push": "npm run lint"
+      }
+  }
 }
