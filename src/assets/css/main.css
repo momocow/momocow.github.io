@@ -921,7 +921,7 @@
 		opacity: 0.95;
 		position: relative;
 		text-align: center;
-		width: 27em;
+		width: 29em;
 	}
 
 		#main .avatar {
@@ -934,7 +934,8 @@
 				display: block;
 				margin: 0 auto;
 				border-radius: 100%;
-				box-shadow: 0 0 0 1.5em #ffffff;
+        box-shadow: 0 0 0 1.5em #ffffff;
+        cursor: pointer;
 			}
 
 			#main .avatar:before {
@@ -947,7 +948,11 @@
 				height: 1px;
 				z-index: -1;
 				background: #c8cccf;
-			}
+      }
+      
+      #main .description {
+        margin-bottom: 20px;
+      }
 
 		@media screen and (max-width: 480px) {
 

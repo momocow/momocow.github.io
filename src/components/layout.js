@@ -1,19 +1,23 @@
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import noScriptCss from 'file-loader!../assets/css/noscript.css'
 import { GatsbySeo } from 'gatsby-plugin-next-seo'
-import { useI18next } from 'gatsby-plugin-react-i18next'
+import { Helmet, useI18next } from 'gatsby-plugin-react-i18next'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Helmet } from 'react-helmet-async'
+import { ExternalLink } from 'react-external-link'
+import 'react-tiny-fab/dist/styles.css'
 import '../assets/css/main.css'
+import logo from '../assets/images/logo.svg'
+import { TWITTER_HANDLE, USERNAME } from '../config'
 
 export function Layout({ children }) {
   const { defaultLanguage, languages, language, t, siteUrl } = useI18next()
+
   return (
     <>
       <GatsbySeo
-        title={t('metadata:name')}
-        description={t('metadata:description')}
+        title={t('title')}
+        description={t('description', { joinArrays: '' })}
         language={language}
         canonical={siteUrl}
         languageAlternates={languages.map(lng => ({
@@ -22,15 +26,15 @@ export function Layout({ children }) {
         }))}
         twitter={{
           cardType: 'summary',
-          handle: '@_momocow_',
-          site: '@_momocow_'
+          handle: `@${TWITTER_HANDLE}`,
+          site: `@${TWITTER_HANDLE}`
         }}
         openGraph={{
           url: siteUrl,
           type: 'website',
-          title: t('metadata:name'),
+          title: t('title'),
           locale: language,
-          description: t('metadata:description'),
+          description: t('description'),
           images: [
             {
               url: window.location.origin + '/favicon.svg',
@@ -40,17 +44,33 @@ export function Layout({ children }) {
             }
           ],
           profile: {
-            firstName: 'Tao',
-            lastName: 'Cheng',
-            username: '_momocow_',
+            firstName: t('firstName'),
+            lastName: t('lastName'),
+            username: USERNAME,
             gender: 'male'
           }
         }}
       />
       <Helmet>
+        <link rel="icon" type="image/png" href={logo}></link>
         <noscript>{`<link rel="stylesheet" href="${noScriptCss}" />`}</noscript>
       </Helmet>
-      {children}
+      <div id="wrapper">
+        {children}
+        <footer id="footer">
+          <ul className="copyright">
+            <li>
+              <ExternalLink href="https://github.com/momocow">
+                &copy; {USERNAME}
+              </ExternalLink>
+            </li>
+            <li>
+              Design:{' '}
+              <ExternalLink href="http://html5up.net">HTML5 UP</ExternalLink>
+            </li>
+          </ul>
+        </footer>
+      </div>
     </>
   )
 }

@@ -1,0 +1,24 @@
+{
+  "title": "鄭道",
+  "fullName": "鄭道",
+  "nickName": "牛牛",
+  "subtitle": "全端工程師",
+  "firstName": "道",
+  "lastName": "鄭",
+  "description": [
+    "內向又自卑的人類🤢",
+    "自我認同是一條牛🐮",
+    "喜歡甜食🥞",
+    "喜歡閱讀📖",
+    "喜歡寫作📝",
+    "喜歡塗鴉🎨",
+    "專業技能包含 JavaScript / TypeScript / Python / NodeJS。"
+  ],
+  "share": {
+    "qrcode": "分享 QR Code",
+    "url": "分享連結"
+  },
+  "errors": {
+    "qrcode-loading": "QR Code 載入失敗!"
+  }
+}
