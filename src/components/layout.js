@@ -9,12 +9,20 @@ import 'react-tiny-fab/dist/styles.css'
 import '../assets/css/main.css'
 import logo from '../assets/images/logo.svg'
 import { TWITTER_HANDLE, USERNAME } from '../config'
+import HTMLComment from 'react-html-comment'
+
+const license = `
+Identity by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+`
 
 export function Layout({ children }) {
   const { defaultLanguage, languages, language, t, siteUrl } = useI18next()
 
   return (
     <>
+      <HTMLComment text={license} />
       <GatsbySeo
         title={t('title')}
         description={t('description', { joinArrays: '' })}
@@ -52,7 +60,7 @@ export function Layout({ children }) {
         }}
       />
       <Helmet>
-        <link rel="icon" type="image/png" href={logo}></link>
+        <link rel="icon" type="image/png" href={logo} />
         <noscript>{`<link rel="stylesheet" href="${noScriptCss}" />`}</noscript>
       </Helmet>
       <div id="wrapper">
