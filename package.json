@@ -6,10 +6,10 @@
   "license": "UNLICENSED",
   "scripts": {
     "commit": "gitmoji -c",
-    "build": "gatsby build",
+    "build": "gatsby build && shx mv public docs",
     "develop": "gatsby develop",
     "lint": "eslint src",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "format": "prettier --write \"src/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
@@ -60,7 +60,8 @@
     "i18next-fs-backend": "^1.0.7",
     "pkg-up": "^3.1.0",
     "prettier": "2.1.2",
-    "prettier-config-standard": "^1.0.1"
+    "prettier-config-standard": "^1.0.1",
+    "shx": "^0.3.3"
   },
   "keywords": [
     "portfolio"
