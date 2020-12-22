@@ -1,6 +1,4 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import clsx from 'clsx'
 import styled from 'styled-components'
 
 export const Mask = styled.div`

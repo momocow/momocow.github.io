@@ -9,7 +9,7 @@
     "build": "gatsby build && shx mv public docs",
     "develop": "gatsby develop",
     "lint": "eslint src",
-    "format": "prettier --write \"src/*.{js,jsx,ts,tsx,json,md}\"",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
@@ -44,8 +44,6 @@
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "eslint": "^7.12.1",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-config-prettier-standard": "^3.0.1",
     "eslint-config-standard": "^16.0.1",
     "eslint-config-standard-jsx": "^10.0.0",
     "eslint-config-standard-react": "^11.0.1",
@@ -78,7 +76,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run format",
-      "//pre-push": "npm run lint"
+      "pre-push": "npm run lint"
     }
   }
 }

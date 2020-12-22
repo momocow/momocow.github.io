@@ -1,19 +1,19 @@
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { useTranslation } from 'gatsby-plugin-react-i18next'
+import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import ReactCardFlip from 'react-card-flip'
 import { ExternalLink } from 'react-external-link'
+import { Helmet } from 'react-helmet-async'
+import { config as presets } from 'react-spring'
 /**
  * @see {@link https://github.com/WinterCore/react-text-transition/issues/21}
  */
 import TextTransition from 'react-text-transition'
-import { config as presets } from 'react-spring'
 import { Action, Fab } from 'react-tiny-fab'
 import { Layout } from '../components/layout'
-
 import { Mask } from '../components/mask'
-import { Helmet } from 'react-helmet-async'
 
 // const canShare = typeof navigator.share === 'function'
 const canShare = false
@@ -48,6 +48,8 @@ async function shareQrcode() {
   }
 }
 
+const shareUrl = () => share({ url: location.origin })
+
 export default function Portfolio({ data }) {
   const { t } = useTranslation()
 
@@ -62,7 +64,7 @@ export default function Portfolio({ data }) {
   const myName = t(flipped ? 'nickName' : 'fullName')
 
   return (
-    <Layout data={data}>
+    <Layout ogImageSrc={data.avatar1.childImageSharp.fixed.src}>
       <Helmet>
         <title>{myName}</title>
       </Helmet>
@@ -101,21 +103,24 @@ export default function Portfolio({ data }) {
             <li>
               <ExternalLink
                 href="https://github.com/momocow"
-                className="icon brands fa-github">
+                className="icon brands fa-github"
+              >
                 GitHub
               </ExternalLink>
             </li>
             <li>
               <ExternalLink
                 href="https://www.instagram.com/_momocow_/"
-                className="icon brands fa-instagram">
+                className="icon brands fa-instagram"
+              >
                 Instagram
               </ExternalLink>
             </li>
             <li>
               <ExternalLink
                 href="https://twitter.com/_momocow_"
-                className="icon brands fa-twitter">
+                className="icon brands fa-twitter"
+              >
                 Twitter
               </ExternalLink>
             </li>
@@ -134,19 +139,20 @@ export default function Portfolio({ data }) {
               }}
               icon={<i className="fa fa-share-alt" />}
               event="click"
-              alwaysShowTitle={true}>
+              alwaysShowTitle
+            >
               <Action
                 text={t('share.url')}
                 style={{ backgroundColor: '#ffffff94' }}
-                onClick={() =>
-                  share({ url: location.origin }).then(() => setMasked(false))
-                }>
+                onClick={() => shareUrl().then(() => setMasked(false))}
+              >
                 <i className="fa fa-link" />
               </Action>
               <Action
                 text={t('share.qrcode')}
                 style={{ backgroundColor: '#ffffff94' }}
-                onClick={() => shareQrcode().then(() => setMasked(false))}>
+                onClick={() => shareQrcode().then(() => setMasked(false))}
+              >
                 <i className="fa fa-qrcode" />
               </Action>
             </Fab>
@@ -156,6 +162,21 @@ export default function Portfolio({ data }) {
       </section>
     </Layout>
   )
+}
+
+const avatarPropType = {
+  childImageSharp: PropTypes.shape({
+    fixed: PropTypes.shape({
+      src: PropTypes.string
+    })
+  })
+}
+
+Portfolio.propTypes = {
+  data: PropTypes.shape({
+    avatar1: PropTypes.shape(avatarPropType),
+    avatar2: PropTypes.shape(avatarPropType)
+  })
 }
 
 export const query = graphql`
