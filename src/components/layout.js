@@ -1,5 +1,3 @@
-// eslint-disable-next-line import/no-webpack-loader-syntax
-import noScriptCss from 'file-loader!../assets/css/noscript.css'
 import { GatsbySeo } from 'gatsby-plugin-next-seo'
 import { Helmet, useI18next } from 'gatsby-plugin-react-i18next'
 import PropTypes from 'prop-types'
@@ -19,6 +17,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 
 export function Layout({ children }) {
   const { defaultLanguage, languages, language, t, siteUrl } = useI18next()
+  const origin = new URL(siteUrl).origin
 
   return (
     <>
@@ -45,7 +44,7 @@ export function Layout({ children }) {
           description: t('description'),
           images: [
             {
-              url: window.location.origin + '/favicon.svg',
+              url: origin + '/favicon.svg',
               width: 150,
               height: 150,
               alt: 'logo'
@@ -61,7 +60,7 @@ export function Layout({ children }) {
       />
       <Helmet>
         <link rel="icon" type="image/png" href={logo} />
-        <noscript>{`<link rel="stylesheet" href="${noScriptCss}" />`}</noscript>
+        <noscript>{`<link rel="stylesheet" href="/noscript.css" />`}</noscript>
       </Helmet>
       <div id="wrapper">
         {children}
