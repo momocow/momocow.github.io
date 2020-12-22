@@ -13,6 +13,7 @@ import { Action, Fab } from 'react-tiny-fab'
 import { Layout } from '../components/layout'
 
 import { Mask } from '../components/mask'
+import { Helmet } from 'react-helmet-async'
 
 // const canShare = typeof navigator.share === 'function'
 const canShare = false
@@ -49,12 +50,22 @@ async function shareQrcode() {
 
 export default function Portfolio({ data }) {
   const { t } = useTranslation()
-  const [flipped, setFlipped] = useState(false)
+
+  const defaultFlipped =
+    typeof location === 'undefined'
+      ? false
+      : new URLSearchParams(location.hash).has('me')
+
+  const [flipped, setFlipped] = useState(defaultFlipped)
   const [masked, setMasked] = useState(false)
 
+  const myName = t(flipped ? 'nickName' : 'fullName')
+
   return (
-    <Layout>
-      {/* <!-- Main --> */}
+    <Layout data={data}>
+      <Helmet>
+        <title>{myName}</title>
+      </Helmet>
       <section id="main">
         <header>
           <span className="avatar" onClick={() => setFlipped(!flipped)}>
@@ -70,7 +81,7 @@ export default function Portfolio({ data }) {
                */
               typeof window !== 'undefined' ? (
                 <TextTransition
-                  text={t(flipped ? 'nickName' : 'fullName')}
+                  text={myName}
                   inline
                   direction="down"
                   springConfig={presets.wobbly}
