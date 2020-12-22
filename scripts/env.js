@@ -7,7 +7,7 @@ if (!PACKAGE_JSON_FILE) {
 }
 
 const ROOT_DIR = path.dirname(PACKAGE_JSON_FILE)
-const LOCALES_DIR = path.join(ROOT_DIR, 'locales')
+const LOCALES_DIR = path.join(ROOT_DIR, 'src', 'assets', 'locales')
 const IMG_DIR = path.join(ROOT_DIR, 'src', 'assets', 'images')
 
 const LANG = 'zh-TW'

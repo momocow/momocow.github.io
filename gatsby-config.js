@@ -1,4 +1,4 @@
-const { LANG: defaultLanguage, IMG_DIR } = require('./scripts/env')
+const { LANG: defaultLanguage, IMG_DIR, LOCALES_DIR } = require('./scripts/env')
 const { getAvailableLanguages } = require('./scripts/i18n')
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-react-i18next',
       options: {
-        path: 'locales',
+        path: LOCALES_DIR,
         languages: getAvailableLanguages(),
         siteUrl: 'https://cow.moe/',
         defaultLanguage,
