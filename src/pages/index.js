@@ -4,7 +4,11 @@ import { useTranslation } from 'gatsby-plugin-react-i18next'
 import React, { useState } from 'react'
 import ReactCardFlip from 'react-card-flip'
 import { ExternalLink } from 'react-external-link'
-import TextTransition, { presets } from 'react-text-transition'
+/**
+ * @see {@link https://github.com/WinterCore/react-text-transition/issues/21}
+ */
+import TextTransition from 'react-text-transition'
+import { config as presets } from 'react-spring'
 import { Action, Fab } from 'react-tiny-fab'
 import { Layout } from '../components/layout'
 
@@ -60,12 +64,19 @@ export default function Portfolio({ data }) {
             </ReactCardFlip>
           </span>
           <h1>
-            <TextTransition
-              text={t(flipped ? 'nickName' : 'fullName')}
-              inline
-              direction="down"
-              springConfig={presets.wobbly}
-            />
+            {
+              /**
+               * @see {@link https://github.com/WinterCore/react-text-transition/issues/21}
+               */
+              typeof window !== 'undefined' ? (
+                <TextTransition
+                  text={t(flipped ? 'nickName' : 'fullName')}
+                  inline
+                  direction="down"
+                  springConfig={presets.wobbly}
+                />
+              ) : null
+            }
           </h1>
           <p>{t('subtitle')}</p>
         </header>
