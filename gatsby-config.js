@@ -1,7 +1,15 @@
-const { LANG: defaultLanguage, IMG_DIR, LOCALES_DIR } = require('./scripts/env')
+const {
+  LANG: defaultLanguage,
+  IMG_DIR,
+  LOCALES_DIR,
+  SITE_URL
+} = require('./scripts/env')
 const { getAvailableLanguages } = require('./scripts/i18n')
 
 module.exports = {
+  siteMetadata: {
+    siteUrl: SITE_URL
+  },
   plugins: [
     'gatsby-plugin-robots-txt',
     'gatsby-plugin-advanced-sitemap',
@@ -14,7 +22,7 @@ module.exports = {
       options: {
         path: LOCALES_DIR,
         languages: getAvailableLanguages(),
-        siteUrl: 'https://cow.moe/',
+        siteUrl: SITE_URL,
         defaultLanguage,
         i18nextOptions: {
           interpolation: {
