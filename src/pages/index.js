@@ -14,6 +14,7 @@ import TextTransition from 'react-text-transition'
 import { Action, Fab } from 'react-tiny-fab'
 import { Layout } from '../components/layout'
 import { Mask } from '../components/mask'
+import { hash } from '../config'
 
 // const canShare = typeof navigator.share === 'function'
 const canShare = false
@@ -50,30 +51,57 @@ async function shareQrcode() {
 
 const shareUrl = () => share({ url: location.origin })
 
+const IDENTITIES = [
+  {
+    id: 'cow',
+    i18nKey: 'nickName',
+    avatarKey: 'avatarCow'
+  },
+  {
+    id: 'me',
+    i18nKey: 'fullName',
+    avatarKey: 'avatarMe'
+  }
+]
+
+function getIdenetity() {
+  for (let i = 0; i < IDENTITIES.length; i++) {
+    const subject = IDENTITIES[i]
+    if (hash.has(subject.id)) {
+      return [subject, i]
+    }
+  }
+  return [IDENTITIES[0], 0]
+}
+
 export default function Portfolio({ data }) {
   const { t } = useTranslation()
 
-  const defaultFlipped =
-    typeof location === 'undefined'
-      ? false
-      : new URLSearchParams(location.hash).has('me')
+  const [defaultIdentity, defaultIdentityIndex] = getIdenetity()
 
-  const [flipped, setFlipped] = useState(defaultFlipped)
+  const [flipped, setFlipped] = useState(defaultIdentityIndex === 1)
   const [masked, setMasked] = useState(false)
 
-  const myName = t(flipped ? 'nickName' : 'fullName')
+  const currentIdentityIndex = Number(flipped)
+  const myName = t(IDENTITIES[currentIdentityIndex].i18nKey)
 
   return (
-    <Layout ogImageSrc={data.avatar1.childImageSharp.fixed.src}>
+    <Layout
+      ogImageSrc={data[defaultIdentity.avatarKey].childImageSharp.fixed.src}
+    >
       <Helmet>
-        <title>{myName}</title>
+        <title>{t('title', { name: myName })}</title>
       </Helmet>
       <section id="main">
         <header>
           <span className="avatar" onClick={() => setFlipped(!flipped)}>
             <ReactCardFlip isFlipped={flipped}>
-              <Img fixed={data.avatar1.childImageSharp.fixed} />
-              <Img fixed={data.avatar2.childImageSharp.fixed} />
+              {IDENTITIES.map(s => (
+                <Img
+                  key={s.avatarKey}
+                  fixed={data[s.avatarKey].childImageSharp.fixed}
+                />
+              ))}
             </ReactCardFlip>
           </span>
           <h1>
@@ -164,7 +192,7 @@ export default function Portfolio({ data }) {
   )
 }
 
-const avatarPropType = {
+const AvatarPropType = {
   childImageSharp: PropTypes.shape({
     fixed: PropTypes.shape({
       src: PropTypes.string
@@ -174,14 +202,14 @@ const avatarPropType = {
 
 Portfolio.propTypes = {
   data: PropTypes.shape({
-    avatar1: PropTypes.shape(avatarPropType),
-    avatar2: PropTypes.shape(avatarPropType)
+    avatarCow: PropTypes.shape(AvatarPropType),
+    avatarMe: PropTypes.shape(AvatarPropType)
   })
 }
 
 export const query = graphql`
   query {
-    avatar1: file(relativePath: { eq: "avatar1.jpg" }) {
+    avatarCow: file(relativePath: { eq: "avatar-cow.png" }) {
       childImageSharp {
         fixed(width: 125, height: 125) {
           ...GatsbyImageSharpFixed
@@ -189,7 +217,7 @@ export const query = graphql`
       }
     }
 
-    avatar2: file(relativePath: { eq: "avatar2.png" }) {
+    avatarMe: file(relativePath: { eq: "avatar-me.jpg" }) {
       childImageSharp {
         fixed(width: 125, height: 125) {
           ...GatsbyImageSharpFixed
