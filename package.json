@@ -6,7 +6,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "commit": "gitmoji -c",
-    "build": "gatsby build && shx mv public docs",
+    "build": "gatsby build && shx rm -r docs && shx mv public docs",
     "develop": "gatsby develop",
     "lint": "eslint src",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
