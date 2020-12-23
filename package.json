@@ -16,6 +16,7 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
+    "animate.css": "^4.1.1",
     "clsx": "^1.1.1",
     "darkmode-js": "^1.5.7",
     "gatsby": "^2.29.1",
