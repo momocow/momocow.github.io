@@ -19,12 +19,6 @@ export const Mask = styled.div`
         }}
 `
 
-// export function Mask({ open = false } = {}) {
-//   return <div className={clsx({
-//     mask: true, open
-//   })}></div>
-// }
-
 Mask.propTypes = {
   open: PropTypes.bool.isRequired
 }

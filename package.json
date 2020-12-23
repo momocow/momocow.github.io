@@ -75,7 +75,6 @@
   "homepage": "https://github.com/momocow/momocow.github.io#readme",
   "husky": {
     "hooks": {
-      "pre-commit": "npm run format",
       "pre-push": "npm run lint"
     }
   }
