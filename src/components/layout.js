@@ -2,6 +2,7 @@ import { GatsbySeo } from 'gatsby-plugin-next-seo'
 import { Helmet, useI18next } from 'gatsby-plugin-react-i18next'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 import { ExternalLink } from 'react-external-link'
 import HTMLComment from 'react-html-comment'
 import 'react-tiny-fab/dist/styles.css'
@@ -15,16 +16,31 @@ html5up.net | @ajlkn
 Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 `
 
-export function Layout({ ogImageSrc, children }) {
+export function Layout({ children }) {
   const { defaultLanguage, languages, language, t, siteUrl } = useI18next()
   const origin = new URL(siteUrl).origin
+
+  const data = useStaticQuery(graphql`
+    query {
+      avatarCow: file(relativePath: { eq: "avatar-cow.png" }) {
+        childImageSharp {
+          fixed(width: 125, height: 125) {
+            ...GatsbyImageSharpFixed
+          }
+        }
+      }
+    }
+  `)
+
+  const title = t('title', { name: t('nickName') })
+  const description = t('description', { joinArrays: '' })
 
   return (
     <>
       <HTMLComment text={license} />
       <GatsbySeo
-        title={t('title')}
-        description={t('description', { joinArrays: '' })}
+        title={title}
+        description={description}
         language={language}
         canonical={siteUrl}
         languageAlternates={languages.map(lng => ({
@@ -39,27 +55,21 @@ export function Layout({ ogImageSrc, children }) {
         openGraph={{
           url: siteUrl,
           type: 'website',
-          title: t('title'),
+          title,
           locale: language,
-          description: t('description', { joinArrays: '' }),
+          description,
           images: [
             {
-              url: origin + ogImageSrc,
+              url: origin + data.avatarCow.childImageSharp.fixed.src,
               width: 150,
               height: 150,
               alt: 'logo'
             }
-          ],
-          profile: {
-            firstName: t('firstName'),
-            lastName: t('lastName'),
-            username: USERNAME,
-            gender: 'male'
-          }
+          ]
         }}
       />
       <Helmet>
-        <link rel="icon" type="image/png" href={logo} />
+        <link rel="icon" href={logo} sizes="any" type="image/svg+xml" />
         <noscript>{`<link rel="stylesheet" href="/noscript.css" />`}</noscript>
       </Helmet>
       <div id="wrapper">
@@ -83,6 +93,5 @@ export function Layout({ ogImageSrc, children }) {
 }
 
 Layout.propTypes = {
-  children: PropTypes.node,
-  ogImageSrc: PropTypes.string
+  children: PropTypes.node
 }
