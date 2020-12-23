@@ -11,45 +11,21 @@ import { config as presets } from 'react-spring'
  * @see {@link https://github.com/WinterCore/react-text-transition/issues/21}
  */
 import TextTransition from 'react-text-transition'
-import { Action, Fab } from 'react-tiny-fab'
+import styled from 'styled-components'
 import { Layout } from '../components/layout'
-import { Mask } from '../components/mask'
+import { QrcodeButton as _QrcodeButton } from '../components/qrcode-button'
 import { hash } from '../config'
 
-// const canShare = typeof navigator.share === 'function'
-const canShare = false
-
-async function share(options) {
-  try {
-    await navigator.share(options)
-  } catch (e) {
-    if (!e.toString().startsWith('AbortError')) {
-      alert(e)
-    }
-  }
-}
-
-async function shareQrcode() {
-  // const { t } = useTranslation()
-  try {
-    const resp = await fetch('qrcode.svg')
-    const imgFile = new File([await resp.blob()], location.hostname + '.svg', {
-      type: resp.headers.get('Content-Type') || 'image/svg+xml'
-    })
-    try {
-      alert(await imgFile.text())
-      await navigator.share({ files: [imgFile] })
-    } catch (e) {
-      if (!e.toString().startsWith('AbortError')) {
-        alert(e)
-      }
-    }
-  } catch (e) {
-    alert(e)
-  }
-}
-
-const shareUrl = () => share({ url: location.origin })
+const QrcodeButton = styled(_QrcodeButton)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #0000005c;
+  font-size: 1.5rem;
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+`
 
 const IDENTITIES = [
   {
@@ -80,7 +56,6 @@ export default function Portfolio({ data }) {
   const [defaultIdentity, defaultIdentityIndex] = getIdenetity()
 
   const [flipped, setFlipped] = useState(defaultIdentityIndex === 1)
-  const [masked, setMasked] = useState(false)
 
   const currentIdentityIndex = Number(flipped)
   const myName = t(IDENTITIES[currentIdentityIndex].i18nKey)
@@ -154,39 +129,7 @@ export default function Portfolio({ data }) {
             </li>
           </ul>
         </footer>
-        {canShare ? (
-          <div onClick={() => setMasked(!masked)}>
-            <Fab
-              mainButtonStyles={{
-                backgroundColor: '#ffffff94',
-                boxShadow: 'none'
-              }}
-              style={{
-                top: '-24px',
-                right: '-24px'
-              }}
-              icon={<i className="fa fa-share-alt" />}
-              event="click"
-              alwaysShowTitle
-            >
-              <Action
-                text={t('share.url')}
-                style={{ backgroundColor: '#ffffff94' }}
-                onClick={() => shareUrl().then(() => setMasked(false))}
-              >
-                <i className="fa fa-link" />
-              </Action>
-              <Action
-                text={t('share.qrcode')}
-                style={{ backgroundColor: '#ffffff94' }}
-                onClick={() => shareQrcode().then(() => setMasked(false))}
-              >
-                <i className="fa fa-qrcode" />
-              </Action>
-            </Fab>
-          </div>
-        ) : null}
-        <Mask open={masked} />
+        <QrcodeButton />
       </section>
     </Layout>
   )
