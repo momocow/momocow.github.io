@@ -71,7 +71,10 @@ export default function Portfolio({ data }) {
       <section id="main">
         <header>
           <span className="avatar" onClick={() => setFlipped(!flipped)}>
-            <ReactCardFlip isFlipped={flipped} containerStyle={{ cursor: 'pointer' }}>
+            <ReactCardFlip
+              isFlipped={flipped}
+              containerStyle={{ cursor: 'pointer' }}
+            >
               {IDENTITIES.map(s => (
                 <Img
                   key={s.avatarKey}
