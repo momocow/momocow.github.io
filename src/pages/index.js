@@ -15,6 +15,7 @@ import styled from 'styled-components'
 import { Layout } from '../components/layout'
 import { QrcodeButton as _QrcodeButton } from '../components/qrcode-button'
 import { hash } from '../config'
+import { AvatarPropType } from '../utils'
 
 const QrcodeButton = styled(_QrcodeButton)`
   position: absolute;
@@ -70,7 +71,7 @@ export default function Portfolio({ data }) {
       <section id="main">
         <header>
           <span className="avatar" onClick={() => setFlipped(!flipped)}>
-            <ReactCardFlip isFlipped={flipped}>
+            <ReactCardFlip isFlipped={flipped} containerStyle={{ cursor: 'pointer' }}>
               {IDENTITIES.map(s => (
                 <Img
                   key={s.avatarKey}
@@ -133,14 +134,6 @@ export default function Portfolio({ data }) {
       </section>
     </Layout>
   )
-}
-
-const AvatarPropType = {
-  childImageSharp: PropTypes.shape({
-    fixed: PropTypes.shape({
-      src: PropTypes.string
-    })
-  })
 }
 
 Portfolio.propTypes = {

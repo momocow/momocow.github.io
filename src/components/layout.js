@@ -6,6 +6,7 @@ import React from 'react'
 import { ExternalLink } from 'react-external-link'
 import HTMLComment from 'react-html-comment'
 import '../assets/css/main.css'
+import 'animate.css/animate.min.css'
 import logo from '../assets/images/logo.svg'
 import { TWITTER_HANDLE, USERNAME } from '../config'
 

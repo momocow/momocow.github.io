@@ -1,19 +1,12 @@
-import PropTypes from 'prop-types'
+import { useStaticQuery } from 'gatsby'
 import React, { useState } from 'react'
+import styled from 'styled-components'
 import { Mask } from './mask'
+import Img from 'gatsby-image'
 import clsx from 'clsx'
 
-import qrcodeSvg from '../assets/images/qrcode.svg'
-
-import styled from 'styled-components'
-
-const QrcodeImg = styled.img`
-  width: 100%;
-`
-
 const QrcodeDiv = styled.div`
-  width: 60%;
-  margin: 20%;
+  height: 266px;
   background-color: white;
   border-radius: 4px;
 `
@@ -29,13 +22,40 @@ const QrcodeMask = styled(Mask)`
 `
 
 export function QrcodeButton(props) {
+  const data = useStaticQuery(graphql`
+    query {
+      qrcode: file(relativePath: { eq: "qrcode.png" }) {
+        childImageSharp {
+          fixed(width: 250, height: 250) {
+            ...GatsbyImageSharpFixed
+          }
+        }
+      }
+    }
+  `)
+
   const [masked, setMasked] = useState(false)
+  const [shown, setShown] = useState(false)
 
   return (
     <>
-      <QrcodeMask open={masked}>
+      <QrcodeMask
+        open={masked}
+        style={{
+          zIndex: shown || masked ? 1000 : -1,
+          display: shown || masked ? 'block' : 'none'
+        }}
+        onShow={() => setShown(true)}
+        onHide={() => setShown(false)}
+        className={clsx({
+          animate__animated: true,
+          animate__faster: true,
+          animate__fadeIn: masked && !shown,
+          animate__fadeOut: !masked && shown
+        })}
+      >
         <QrcodeDiv>
-          <QrcodeImg src={qrcodeSvg} />
+          <Img fixed={data.qrcode.childImageSharp.fixed} />
         </QrcodeDiv>
       </QrcodeMask>
       <QrcodeA masked={masked} onClick={() => setMasked(!masked)} {...props}>
