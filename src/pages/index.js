@@ -99,7 +99,7 @@ export default function Portfolio({ data }) {
         </header>
 
         <div className="description">
-          {t('description', { joinArrays: '' })}
+          {t('description', { joinArrays: '．' })}
         </div>
 
         <footer>
