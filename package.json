@@ -27,7 +27,7 @@
     "gatsby-plugin-react-helmet-async": "^1.1.0",
     "gatsby-plugin-react-i18next": "0.0.27",
     "gatsby-plugin-robots-txt": "^1.5.5",
-    "gatsby-plugin-sharp": "^2.11.1",
+    "gatsby-plugin-sharp": "^4.25.1",
     "gatsby-source-filesystem": "^2.8.0",
     "gatsby-transformer-sharp": "^2.9.0",
     "i18next": "^19.8.3",
